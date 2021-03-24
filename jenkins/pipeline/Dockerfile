@@ -3,9 +3,10 @@ FROM jenkins/jenkins
 USER root
 
 # Install ansible
-RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py" && python get-pip.py
+RUN apt-get update -y && \
+    apt-get install -y python3 python3-pip
 
-RUN pip install -U ansible
+RUN pip3 install -U ansible
 
 # Install Docker
 
@@ -30,4 +31,3 @@ RUN curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-c
 RUN usermod -aG docker jenkins
 
 USER jenkins
-
